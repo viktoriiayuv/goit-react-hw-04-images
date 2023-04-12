@@ -1,35 +1,35 @@
-import { Component } from 'react';
+import { useState } from 'react';
 
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 
-class App extends Component {
-  state = {
-    searchText: '',
-    searchPage: 1,
+const App = () => {
+  const [searchText, setSearchText] = useState('');
+  const [searchPage, setSearchPage] = useState(1);
+
+  const handleSearch = searchText => {
+    if (searchText.trim() === '') {
+      alert('Enter a search query');
+      return;
+    }
+    setSearchText(searchText.trim());
+    setSearchPage(1);
   };
 
-  handleSearch = searchText => {
-    this.setState({ searchText: searchText.trim(), searchPage: 1 });
+  const handlePageChange = () => {
+    setSearchPage(prevState => prevState + 1);
   };
 
-  handlePageChange = () => {
-    this.setState(prevState => ({ searchPage: prevState.searchPage + 1 }));
-  };
-
-  render() {
-    const { searchText, searchPage } = this.state;
-    return (
-      <>
-        <Searchbar onSubmit={this.handleSearch} />
-        <ImageGallery
-          searchText={searchText}
-          searchPage={searchPage}
-          handlePageChange={this.handlePageChange}
-        />
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Searchbar onSubmit={handleSearch} />
+      <ImageGallery
+        searchText={searchText}
+        searchPage={searchPage}
+        handlePageChange={handlePageChange}
+      />
+    </>
+  );
+};
 
 export default App;
