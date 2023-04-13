@@ -3,5 +3,5 @@ import styled from 'styled-components';
 export const LoaderContainer = styled.div`
   width: 80px;
   margin: 0 auto;
-  padding: 15px;
+  padding: 16px;
 `;
